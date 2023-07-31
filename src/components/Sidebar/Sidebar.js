@@ -8,16 +8,21 @@ import {
   BorderAll as TableIcon,
   QuestionAnswer as SupportIcon,
   LibraryBooks as LibraryIcon,
-  HelpOutline as FAQIcon,
+  Directions as DistanceIcon,
   ArrowBack as ArrowBackIcon,
   Commute as CabIcon,
   AccountCircle as DriverIcon,
-  Map as CityIcon,
+  LocationCity as CityIcon,
   LibraryBooks as FareIcon,
+  Payment as PaymentIcon,
+  ViewList as ViewQueryIcon,
+  Receipt as BookingIcon,
+  SettingsEthernet as CmsIocn,
 } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
 import { withRouter } from "react-router-dom";
 import classNames from "classnames";
+
 
 // styles
 import useStyles from "./styles";
@@ -39,7 +44,7 @@ const structure = [
   {
     id: 1,
     label: "Driver",
-    link: "/app/ui",
+    link: "/app/driver",
     icon: <DriverIcon />,
     children: [
       { label: "Add Driver", link: "/app/driver" },
@@ -49,7 +54,7 @@ const structure = [
   {
     id: 2,
     label: "Cabs",
-    link: "/app/ui",
+    link: "/app/cabsCategory",
     icon: <CabIcon />,
     children: [
       { label: "Add Cab Category", link: "/app/cabsCategory" },
@@ -59,8 +64,8 @@ const structure = [
   {
   id: 3,
   label: "City",
-  link: "/app/ui",
-  icon: <TableIcon />,
+  link: "/app/City",
+  icon: <CityIcon />,
   children: [
     { label: "Add City", link: "/app/City" },
     { label: "View All City", link: "/app/viewCity" },
@@ -71,21 +76,21 @@ const structure = [
 },
 {
   id: 7,
-  label: "Distance", link: "/app/distance", icon: <UIElementsIcon />,
+  label: "Distance", link: "/app/distance", icon: <DistanceIcon />,
 },
 
 
   {
     id: 4,
     label: "Fare Management",
-    link: "/app/typography",
+    link: "/app/fare",
     icon: <FareIcon />,
     children: [
       { label: "Add Fare", link: "/app/fare" },
       { label: "View Fare", link: "/app/fareView" },
     ],
   },
-  { id: 5, label: "Booking List", link: "/app/ui", icon: <TableIcon />,
+  { id: 5, label: "Booking List", link: "/app/booking", icon: <TableIcon />,
 
   children: [
     { label: "New Booking", link: "/app/booking" },
@@ -103,13 +108,13 @@ const structure = [
     id: 6,
     label: "Payment Details",
     link: "/app/notifications",
-    icon: <NotificationsIcon />,
+    icon: <PaymentIcon />,
   },
   {
     id: 8,
     label: "CMS",
     link: "/app/ui",
-    icon: <UIElementsIcon />,
+    icon: <CmsIocn />,
     children: [
       { label: "About Us", link: "/app/ui/icons" },
       { label: "Cancellation", link: "/app/ui/charts" },
@@ -122,17 +127,17 @@ const structure = [
     id: 9,
     label: "View Request",
     link: "/app/ui",
-    icon: <UIElementsIcon />,
+    icon: <ViewQueryIcon />,
     children: [
       { label: "Attach Taxi", link: "/app/ui/icons" },
       { label: "All Query", link: "/app/ui/charts" },
     ],
   },
   {
-    id: 9,
+    id: 10,
     label: "Billing",
     link: "/app/ui",
-    icon: <UIElementsIcon />,
+    icon: <BookingIcon />,
     children: [
       { label: "Creat Bill", link: "/app/ui/icons" },
       { label: "View Bill", link: "/app/ui/charts" },
