@@ -106,17 +106,17 @@ const structure = [
 },
   {
     id: 6,
-    label: "Payment Details",
-    link: "/app/notifications",
+    label: "Finance",
+    link: "/app/finance/Payment",
     icon: <PaymentIcon />,
   },
   {
     id: 8,
     label: "CMS",
-    link: "/app/ui",
+    link: "/app/cms/AboutUs",
     icon: <CmsIocn />,
     children: [
-      { label: "About Us", link: "/app/ui/icons" },
+      { label: "About Us", link: "/app/cms/AboutUs" },
       { label: "Cancellation", link: "/app/ui/charts" },
       { label: "Privicy Policy", link: "/app/ui/maps" },
       { label: "Turms & Condition", link: "/app/ui/maps" },
@@ -126,11 +126,11 @@ const structure = [
   {
     id: 9,
     label: "View Request",
-    link: "/app/ui",
+    link: "/app/request",
     icon: <ViewQueryIcon />,
     children: [
-      { label: "Attach Taxi", link: "/app/ui/icons" },
-      { label: "All Query", link: "/app/ui/charts" },
+      { label: "Attach Taxi", link: "/app/request/AttachTaxiRequest" },
+      { label: "All Query", link: "/app/request/ViewEnquiry" },
     ],
   },
   {
