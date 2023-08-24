@@ -44,6 +44,10 @@ import CabCategoryTable from "../../pages/tables/CabCategoryTable";
 import Booking from "../../pages/booking/Booking"
 import Fare from "../../pages/fare/Fare";
 import FareView from "../../pages/fare/fareView"
+import Payment from "../../pages/finance/Payment"
+import AttachTaxiRequest from "../../pages/request/AttachTaxiRequest";
+import ViewEnquiryPage from "../../pages/request/ViewEnquiry";
+import AboutUs from "../../pages/cms/AboutUs";
 
 
 
@@ -80,7 +84,11 @@ function Layout(props) {
               <Route path="/app/viewCity" component={ViewCity} />
               <Route path="/app/fareView" component={FareView} />
               <Route path="/app/fare" component={Fare} />
-              <Route path="/app/booking" component={Booking} />              
+              <Route path="/app/booking" component={Booking} /> 
+              <Route path="/app/finance" component={Payment} />
+              <Route path="/app/request" component={AttachTaxiRequest} /> 
+              <Route path="/app/ViewEnquiry" component={ViewEnquiryPage} /> 
+              <Route path="/app/cms" component={AboutUs} />             
               <Route path="/app/typography" component={Typography} />
               <Route path="/app/tables" component={Tables} />
               <Route path="/app/CabCategoryTable" component={CabCategoryTable} />

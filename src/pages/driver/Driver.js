@@ -51,7 +51,7 @@ export default function DriverPage() {
                 <GenericDropdown label={'City'} />
               </Grid>
               <Grid item xs={12} md={6}>
-                <GenericDropdown label={'Locality'} />
+                <GenericInput label={'Locality'} required />
               </Grid>
             </Grid>
           </Grid>
