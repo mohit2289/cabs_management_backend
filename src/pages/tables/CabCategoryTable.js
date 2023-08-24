@@ -1,22 +1,8 @@
-import React from "react";
+import React ,{useState, useEffect} from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import MUIDataTable from "mui-datatables";
-
-// components
-import PageTitle from "../../components/PageTitle/PageTitle";
-import { fontWeight } from "@mui/system";
-//import Widget from "../../components/Widget/Widget";
-//import Table from "../dashboard/components/Table/Table";
-
-// data
-//import mock from "../dashboard/mock";
-
-const datatableData = [
-  ["SUV", "4+1", "4X", "Visible", "Edid  Update   Delete   "],
-  ["HATCHBACK", "6+1.", "6X.", "Visible", "Edid  Update   Delete"],
- 
-];
+import {getCabCategory} from '../../services/cab/index';
 
 const useStyles = makeStyles(theme => ({
   tableOverflow: {
@@ -24,14 +10,52 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function CabCategoryTable() {
+const columns = [
+  {
+   name: "category_name",
+   label: "Vehicle Category",
+   options: {
+    filter: true,
+    sort: true,
+   }
+  },
+  {
+   name: "seat_no",
+   label: "Vehicle Segment by Seat",
+   options: {
+    filter: true,
+    sort: false,
+   }
+  },
+  {
+   name: "seat_code",
+   label: "Vehicle Segment by Code",
+   options: {
+    filter: true,
+    sort: false,
+   }
+  },
+  {
+   name: "status",
+   label: "Status",
+   options: {
+    filter: true,
+    sort: false,
+   }
+  },
+ ];
+ 
+
+export default function CabCategoryTable({categoryList}) {
   const classes = useStyles();
+  const datatableData = categoryList;
+
   return (
     <>
        <MUIDataTable
             title="Cab Category LIst"
             data={datatableData}
-            columns={["Vehicle Category", "Vehicle Segment by Seat", "Vehicle Segment by Code", "Status", "Action"]}
+            columns={columns}
             options={{
               filterType: "checkbox",
             }}

@@ -14,8 +14,8 @@ import { fontWeight } from "@mui/system";
 //import mock from "../dashboard/mock";
 
 const datatableData = [
-  ["01", "Patna", "Bhagalpur", "Local", "100km - 10Hrs", "SUV", "700", "12", "30", "100", "22-03-2024", "Viue  Edid  Delete"],
-  ["01", "Patna", "Bhagalpur", "Local", "100km - 10Hrs", "SUV", "700", "12", "30", "100", "22-03-2024", "Viue  Edid  Delete"],
+  ["01", "Patna", "Bhagalpur", "Local", "100km - 10Hrs", "SUV", "700", "12", "30", "100", "22-03-2024", "View  Edit  Delete"],
+  ["01", "Patna", "Bhagalpur", "Local", "100km - 10Hrs", "SUV", "700", "12", "30", "100", "22-03-2024", "View  Edit  Delete"],
  
 ];
 
@@ -37,7 +37,32 @@ export default function DriverTable() {
             columns={["S.No.", "City", "DestinationCity", "Booking Type", "Package", "Vehicle Model", 
              "Fixed Fare", "Fare/Km", "Fare/Extra Hour", "StateEntry", "Valid Date", "Action/Status"]}
             options={{
-              filterType: "checkbox",
+              filter: true,
+			  filterType: 'dropdown',
+			  responsive: 'standard',
+			   customBodyRender: (value, tableMeta, updateValue) => {
+            return (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.alert("EDIT");
+                  }}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={(e) => {
+                    const { data } = this.state;
+                    data.shift();
+                    this.setState({ data });
+                  }}
+                >
+                  Delete
+                </button>
+              </>
+            );
+			   }
             }}
           />
     </>
