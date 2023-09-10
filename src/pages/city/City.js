@@ -1,27 +1,73 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Box, Button, Paper, Grid } from '@mui/material';
 // styles
 import useStyles from "./styles";
 
+// services 
+import {getAllStates} from '../../services/state/index';
+import {addCity} from '../../services/city/index';
+
 // components
-import PageTitle from "../../components/PageTitle/PageTitle";
-import Widget from "../../components/Widget/Widget";
 import { Typography } from "../../components/Wrappers/Wrappers";
 
 import GenericInput from '../../common-components/form-elements/genericInput';
-import GenericDropdown from '../../common-components/form-elements/genericDropdown';
-import GenericCheckbox from "../../common-components/form-elements/genericCheckbox";
+import GenericAutocomplete from '../../common-components/form-elements/genericAutocomplete';
 import GenericSwitch from "../../common-components/form-elements/genericSwitch";
-import { fontWeight } from "@mui/system";
-//import GenericDatePicker from "../../common-components/form-elements/genericDatePicker";
 
 
 export default function CityPage() {
   var classes = useStyles();
+  const [state, setState] = useState([]);
+  const [data, setData] = useState({
+    'state_id': "",
+    'name': "",
+  });
+  
+  const getStateOptionData  = async () => {
+    const getData = await getAllStates();
+    if (getData.data) {
+        const statesArr =  getData.data;
+        const statesObj = statesArr.map(elem => (
+          {
+            id: elem.id,
+            label: elem.name,
+          } 
+        ));
+        setState(statesObj);
+    }
+  }
 
   const handlerChange = (evt) => {
-    console.log(evt.target.value, 'mohit');
+    const value = evt.target.value;
+    setData({
+      ...data,
+      [evt.target.name]: value
+    });
   };
+
+  const handleOnChange = (event, value) => {
+    if(event=='state'){
+      setData({
+        ...data,
+        ['state_id']: value.id,
+      });
+    }
+  }
+
+  const saveData = async() => {
+    try {    
+      const postData = data;    
+      const resp  = await addCity(postData);
+      //toast.success('City saved successfully');
+    } catch (error) {
+      //toast.error(error.message);
+    }
+  }
+
+  useEffect(()=>{
+    getStateOptionData();
+ },[])
+
 
   return (
     <>
@@ -34,42 +80,29 @@ export default function CityPage() {
         </Box>
       <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
-            <GenericDropdown label={'Select State'} required/>
+          <GenericAutocomplete
+                  name="state"
+                  onChange={(e,val) => {
+                    handleOnChange('state',val)
+                  }} 
+                  options={state}
+                  label={'Select State'} 
+                  />
             </Grid>
           <Grid item xs={12} md={4}>
-           <GenericInput label={'City Name'} Name={'City_name'} required/>
+           <GenericInput label={'City Name'}
+            name={'name'}
+            onChange={(e) => {
+              handlerChange(e)
+            }}
+           />
           </Grid>
-          <Grid item xs={12} md={4}>
-          <GenericInput label={'Enter Pin Code'} required />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <GenericInput label={'Sort Order'} required />
-          </Grid>
-          <Grid item xs={12} md={8}>
-              <Grid container spacing={1}>
-              <Grid item xs={12} md={2} style={{ lineHeight: "42px", fontWeight:"bold" }}>
-                City For
-              </Grid>
-              <Grid item xs={12} md={2}>
-                <GenericCheckbox label={'Local '} />
-              </Grid>
+
               <Grid item xs={12} md={3}>
-                <GenericCheckbox label={'Outstation '} />
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <GenericCheckbox label={'Point to Point'} />
-              </Grid>
-              <Grid item xs={12} md={2}>
-                <GenericCheckbox label={'Transfer'} />
-              </Grid>
-              
-              </Grid>
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <GenericSwitch label={'Visible'} required />
+                <GenericSwitch label={'IsVisible'} required />
               </Grid>
           <Grid item xs={12} md={2}>
-            <Button variant="contained" fullWidth sx={{ my: 3 }}>
+            <Button variant="contained" fullWidth sx={{ my: 3 }} onClick={saveData} >
               Add City
             </Button>
           </Grid>

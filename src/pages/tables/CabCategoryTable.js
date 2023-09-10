@@ -1,14 +1,5 @@
-import React ,{useState, useEffect} from "react";
-import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import React from "react";
 import MUIDataTable from "mui-datatables";
-import {getCabCategory} from '../../services/cab/index';
-
-const useStyles = makeStyles(theme => ({
-  tableOverflow: {
-    overflow: 'auto'
-  }
-}))
 
 const columns = [
   {
@@ -47,7 +38,6 @@ const columns = [
  
 
 export default function CabCategoryTable({categoryList}) {
-  const classes = useStyles();
   const datatableData = categoryList;
 
   return (

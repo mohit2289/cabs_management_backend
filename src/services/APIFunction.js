@@ -23,8 +23,12 @@ export default class ApiFunction extends HttpClient {
   };
 
   // ** GET **
-  get = async (uri) => {
-    return this.instance.get(`${this.baseUrl}/${uri}`);
+  get = async (uri, param='') => {
+    let apiurl = `${this.baseUrl}/${uri}`;
+    if(param){
+      apiurl = `${this.baseUrl}/${uri}/${param}`;
+    }
+    return this.instance.get(apiurl);
   };
 
   // ** PATCH **

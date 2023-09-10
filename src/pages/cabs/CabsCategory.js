@@ -4,13 +4,10 @@ import { Box, Button, Paper, Grid } from '@mui/material';
 import useStyles from "./styles";
 
 // components
-import PageTitle from "../../components/PageTitle/PageTitle";
-import Widget from "../../components/Widget/Widget";
 import { Typography } from "../../components/Wrappers/Wrappers";
 
 import GenericInput from '../../common-components/form-elements/genericInput';
 //import GenericDropdown from '../../common-components/form-elements/genericDropdown';
-import GenericCheckbox from "../../common-components/form-elements/genericCheckbox";
 //import MUIDataTable from "mui-datatables";
 import GenericSwitch from "../../common-components/form-elements/genericSwitch";
 import CabCategoryTable from "../tables/CabCategoryTable";
@@ -21,6 +18,8 @@ import {addCabCategory, getCabCategory} from '../../services/cab/index';
 export default function CabsCategoryPage() {
   var classes = useStyles();
   const [isToggled, setIsToggled] = useState(false);
+  const [categoryList, setCategoryList] = useState([]);
+  
   const [data, setData] = useState({
     'category_name': "",
     'seat_no': "",
@@ -31,7 +30,7 @@ export default function CabsCategoryPage() {
   useEffect(() => {
     getCabCategoryData();
   }, []); 
-  const [categoryList, setCategoryList] = useState([]);
+ 
 
   const handlerChange = (evt) => {
     const value = evt.target.value;
@@ -60,8 +59,6 @@ const getCabCategoryData  = async () => {
        setCategoryList(getData.data);
   }
 }
-
-
 
   return (
     <>

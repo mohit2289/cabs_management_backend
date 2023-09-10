@@ -3,14 +3,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import MUIDataTable from "mui-datatables";
 
-// components
-//import PageTitle from "../../components/PageTitle/PageTitle";
-//import { fontWeight } from "@mui/system";
-//import Widget from "../../components/Widget/Widget";
-//import Table from "../dashboard/components/Table/Table";
-
-// data
-//import mock from "../dashboard/mock";
 
 const datatableData = [
   ["1", "Rajesh", "0000000000", "info@triloki.com", "Patan", "Bihar", "Kankarbag, Patna", "Sedan", "Bolero", "Confirm Delete"],
@@ -25,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function TaxiRequestTable() {
-  const classes = useStyles();
+
   return (
     <>
        <MUIDataTable

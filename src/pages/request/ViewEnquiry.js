@@ -1,7 +1,5 @@
 import React from "react";
 import { Grid } from '@mui/material';
-// styles
-import useStyles from "./styles";
 
 // components
 //import PageTitle from "../../components/PageTitle/PageTitle";
@@ -15,11 +13,6 @@ import useStyles from "./styles";
 import TaxiRequestTable from "./TaxiRequestTable";
 
 export default function ViewEnquiryPage() {
-  var classes = useStyles();
-
-  const handlerChange = (evt) => {
-    console.log(evt.target.value, 'mohit');
-  };
 
   return (
     <>

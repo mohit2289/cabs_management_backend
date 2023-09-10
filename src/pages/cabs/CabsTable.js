@@ -9,30 +9,80 @@ import { fontWeight } from "@mui/system";
 //import Widget from "../../components/Widget/Widget";
 //import Table from "../dashboard/components/Table/Table";
 
-// data
-//import mock from "../dashboard/mock";
-
-const datatableData = [
-  ["SUV", "4+1", "4+1", "SUV", "2021", "4+1", "4X", "Visible", "SUV", "4+1", "4X", "Visible", "Visible", "Edid  Update   Delete   "],
-  ["SUV", "4+1", "4X", "Visible", "SUV", "4+1", "4X", "Visible", "SUV", "4+1", "4X", "Visible", "Visible", "Edid  Update   Delete   "],
- 
-];
-
 const useStyles = makeStyles(theme => ({
   tableOverflow: {
     overflow: 'auto'
   }
 }))
 
-export default function CabsTable() {
+const columns = [
+  {
+   name: "cab_name",
+   label: "Cab Name",
+   options: {
+    filter: true,
+    sort: true,
+   }
+  },
+  {
+   name: "model_year",
+   label: "Model Year",
+   options: {
+    filter: true,
+    sort: false,
+   }
+  },
+  {
+   name: "category_name",
+   label: "Category Name",
+   options: {
+    filter: true,
+    sort: false,
+   }
+  },
+  {
+   name: "cab_seat",
+   label: "Cab Seat",
+   options: {
+    filter: true,
+    sort: false,
+   }
+  },
+  {
+    name: "no_bags",
+    label: "No of bags",
+    options: {
+     filter: true,
+     sort: false,
+    }
+   },
+   {
+    name: "amenities",
+    label: "Amenities",
+    options: {
+     filter: true,
+     sort: false,
+    }
+  },
+    {
+      name: "status",
+      label: "Status",
+      options: {
+       filter: true,
+       sort: false,
+    }
+   },
+ ];
+
+export default function CabsTable({cabList}) {
   const classes = useStyles();
+  const datatableData = cabList;
   return (
     <>
        <MUIDataTable
-            title="Cab Category LIst"
+            title="Cab Category List"
             data={datatableData}
-            columns={["Vehicle Name", "Vehicle Image", "Vehicle Seat", "Category Name", 
-            "Model Year", "Bags", "English S", "Uniform", "GPS", "TV", "Water B", "News P", "Music", "Action"]}
+            columns={columns}
             options={{
               filterType: "checkbox",
             }}

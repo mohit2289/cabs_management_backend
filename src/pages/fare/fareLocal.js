@@ -27,7 +27,7 @@ export default function FareLocal() {
       {/* <PageTitle title="Driver" /> */}
 
       
-         
+      <Grid item xs={12} md={12}>
       <Grid container spacing={2}>
               
               <Grid item xs={12} md={4}>
@@ -57,7 +57,8 @@ export default function FareLocal() {
                <Grid item xs={12} md={4}>
                 <GenericInput label={'Night Charges Extra'} />
               </Grid>
-            </Grid>
+          </Grid>
+        </Grid>
           
     </>
   );

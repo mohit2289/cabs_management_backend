@@ -2,26 +2,20 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { TextField } from '@mui/material';
 import React from 'react';
 const GenericAutocomplete = (props) => {
-  const { options, label } = props;
+  const { options = [], label, onChange } = props;
   return (
     <>
       <Autocomplete
-        id="highlights-demo"
+        // id="highlights-demo"
         options={options}
-        getOptionLabel={(option) => option.title}
+        isOptionEqualToValue={(options, value) => options.label === value.label}
+        includeInputInList={true}
+        onChange = {onChange}
+        getOptionLabel={(options) => options.label}
         renderInput={(params) => {
-          return <TextField {...params} label={label} size="small" fullwidth />;
+          return <TextField {...params} label={label}  variant="outlined" size="small" />;
         }}
-        renderOption={(props) => {
-          // const matches = match(option.title, inputValue, { insideWords: true });
-          // const parts = parse(option.title, matches);
-
-          return (
-            <li {...props}>
-              
-            </li>
-          );
-        }}
+        
       />
     </>
   );

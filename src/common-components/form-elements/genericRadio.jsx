@@ -1,24 +1,32 @@
 import * as React from 'react';
+import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import { FormControl, FormControlLabel } from '@mui/material';
 
-export default function GenericRadio() {
+const GenericRadio = (props) => {
+  const { options, defaultSelected, name, groupLabel, orientation } = props;
   return (
-    <FormControl>
-      <FormLabel id="demo-row-radio-buttons-group-label">Trip Type</FormLabel>
+    <FormControl sx={{ fontWeight: '470' }}>
+      <FormLabel id="demo-row-radio-buttons-group-label">{groupLabel}</FormLabel>
       <RadioGroup
-        row
+        defaultValue={defaultSelected}
+        row={orientation === 'row' ? true : false}
         aria-labelledby="demo-row-radio-buttons-group-label"
-        name="row-radio-buttons-group"
+        name={name}
+        {...props}
       >
-        <FormControlLabel value="local" control={<Radio />} label="Local" />
-        <FormControlLabel value="Outstaion" control={<Radio />} label="Outstation" />
-        <FormControlLabel value="PointToPoint" control={<Radio />} label="Point to Point" />
-        <FormControlLabel value="Transfer" control={<Radio />} label="Transfer" />
+        {options &&
+          options.map((option, index) => (
+            <FormControlLabel
+              value={option?.value}
+              key={index}
+              control={<Radio />}
+              label={option?.label}
+            />
+          ))}
       </RadioGroup>
     </FormControl>
   );
-}
+};
+export default GenericRadio;

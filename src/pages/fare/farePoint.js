@@ -27,9 +27,8 @@ export default function FarePoint() {
       {/* <PageTitle title="Driver" /> */}
 
       
-         
-      <Grid container spacing={2}>
-              
+      <Grid item xs={12} md={12}>
+          <Grid container spacing={2}>              
               
               <Grid item xs={12} md={4}>
                 <GenericInput label={'Fixed Fare'} />
@@ -50,6 +49,7 @@ export default function FarePoint() {
                 <GenericSwitch label={'Add Return Fare For Same City'} />
               </Grid>
             </Grid>
+      </Grid>
           
     </>
   );
