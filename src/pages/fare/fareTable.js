@@ -1,22 +1,68 @@
-import React from "react";
+import React, { useState, useEffect }  from "react";
 
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import MUIDataTable from "mui-datatables";
 
-// components
-import PageTitle from "../../components/PageTitle/PageTitle";
-import { fontWeight } from "@mui/system";
-//import Widget from "../../components/Widget/Widget";
-//import Table from "../dashboard/components/Table/Table";
-//import useStyles from "./styles";
-// data
-//import mock from "../dashboard/mock";
+import {getAllFareDetails} from '../../services/fare/index';
 
-const datatableData = [
-  ["01", "Patna", "Bhagalpur", "Local", "100km - 10Hrs", "SUV", "700", "12", "30", "100", "22-03-2024", "View  Edit  Delete"],
-  ["01", "Patna", "Bhagalpur", "Local", "100km - 10Hrs", "SUV", "700", "12", "30", "100", "22-03-2024", "View  Edit  Delete"],
- 
+const columns = [{
+  name: "city_name",
+  label: "City",
+  options: {
+   filter: true,
+   sort: true,
+  }
+ },
+ {
+  name: "package_mode",
+  label: "Booking Type",
+  options: {
+   filter: true,
+   sort: true,
+  }
+ }, 
+ {
+  name: "package_name",
+  label: "Package",
+  options: {
+   filter: true,
+   sort: true,
+  }
+ },
+ {
+  name: "vehicle_name",
+  label: "vehicle Model",
+  options: {
+   filter: true,
+   sort: true,
+  }
+ },
+ {
+  name: "local_pkg_fare",
+  label: "Fixed Fare",
+  options: {
+   filter: true,
+   sort: true,
+  }
+ },
+ {
+  name: "per_km_charge",
+  label: "Fare/Km",
+  options: {
+   filter: true,
+   sort: true,
+  }
+ },
+ {
+  name: "per_hr_charge",
+  label: "Fare/Extra Hour",
+  options: {
+   filter: true,
+   sort: true,
+  }
+ },
+
 ];
 
 const useStyles = makeStyles (theme => ({
@@ -28,14 +74,25 @@ const useStyles = makeStyles (theme => ({
 
 export default function DriverTable() {
   const classes = useStyles();
+  const [fareList, setFareList] = useState([]);
+
+  useEffect(()=>{
+    getAllFare();
+  },[])
+
+  const getAllFare = async() => {
+    const response = await getAllFareDetails();
+    if (response.data) {
+      setFareList(response.data);
+    }
+  }
   return (
     <>
     
        <MUIDataTable
             title="Fare LIst"
-            data={datatableData}
-            columns={["S.No.", "City", "DestinationCity", "Booking Type", "Package", "Vehicle Model", 
-             "Fixed Fare", "Fare/Km", "Fare/Extra Hour", "StateEntry", "Valid Date", "Action/Status"]}
+            data={fareList}
+            columns={columns}
             options={{
               filter: true,
 			  filterType: 'dropdown',

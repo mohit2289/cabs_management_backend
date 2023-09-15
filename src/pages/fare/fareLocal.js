@@ -1,27 +1,14 @@
 import React from "react";
-import { Box, Button, Paper, Grid } from '@mui/material';
-// styles
-import useStyles from "./styles";
+import { Grid } from '@mui/material';
 
-// components
-import PageTitle from "../../components/PageTitle/PageTitle";
-import Widget from "../../components/Widget/Widget";
-import { Typography } from "../../components/Wrappers/Wrappers";
 
 import GenericInput from '../../common-components/form-elements/genericInput';
-import GenericDropdown from '../../common-components/form-elements/genericDropdown';
-//import { grey } from "@material-ui/core/colors";
-//import GenericDatePicker from "../../common-components/form-elements/genericDatePicker";
-import GenericSwitch from "../../common-components/form-elements/genericSwitch";
-import GenericRadio from "../../common-components/form-elements/genericRadio";
+import GenericAutocomplete from '../../common-components/form-elements/genericAutocomplete';
 
-export default function FareLocal() {
-  var classes = useStyles();
 
-  const handlerChange = (evt) => {
-    console.log(evt.target.value, 'mohit');
-  };
-
+export default function FareLocal(props) {
+  const {localPackage, handleOnChange, handlerChange} = props;
+  
   return (
     <>
       {/* <PageTitle title="Driver" /> */}
@@ -31,29 +18,45 @@ export default function FareLocal() {
       <Grid container spacing={2}>
               
               <Grid item xs={12} md={4}>
-                <GenericDropdown label={'Local Package'} />
+                <GenericAutocomplete
+                    name="local_package"
+                    onChange={(e,val) => {
+                      handleOnChange('local_package',val)
+                    }} 
+                    options={localPackage}
+                    label={'Select Local Package'} 
+                    />
               </Grid>
               <Grid item xs={12} md={4}>
-                <GenericInput label={'Fixed Fare'} />
+                <GenericInput label={'Fixed Fare'} 
+                  name="local_pkg_fare"
+                  onChange={(e)=>{
+                    handlerChange(e)
+                  }}  
+                />
               </Grid>
               <Grid item xs={12} md={4}>
-                <GenericInput label={'Fare Per Kms'} />
+                <GenericInput label={'Fare Per Kms'}
+                 name="per_km_charge"
+                 onChange={(e)=>{
+                   handlerChange(e)
+                 }}  />
               </Grid>
               <Grid item xs={12} md={4}>
-                <GenericInput label={'Fare Per Extra Hours'} />
+                <GenericInput label={'Fare Per Extra Hours'} 
+                 name="per_hr_charge"
+                 onChange={(e)=>{
+                   handlerChange(e)
+                 }} />
               </Grid>
-              <Grid item xs={12} md={4}>
-                <GenericInput label={'Fare Per Extra Hours'} />
-              </Grid> 
-              <Grid item xs={12} md={4}>
+            
+              {/* <Grid item xs={12} md={4}>
                 <GenericInput label={'Waiting Time'} />
               </Grid> 
               <Grid item xs={12} md={4}>
                 <GenericInput label={'Extra Waiting Time Charges'} />
-              </Grid> 
-              <Grid item xs={12} md={4}>
-                <GenericInput label={'State Entry Taxes'} />
-              </Grid>
+              </Grid>  */}
+             
                <Grid item xs={12} md={4}>
                 <GenericInput label={'Night Charges Extra'} />
               </Grid>
