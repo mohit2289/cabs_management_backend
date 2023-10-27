@@ -23,7 +23,7 @@ const columns = [{
   }
  }, 
  {
-  name: "package_name",
+  name: "local_pkg_name",
   label: "Package",
   options: {
    filter: true,

@@ -8,6 +8,7 @@ export default class ApiFunction extends HttpClient {
   constructor() {
     super();
     this.baseUrl = `http://localhost:8080/api/v1`;
+	  //this.baseUrl = 'https://api.cabtaxiserviceinpatna.co.in/api/v1';
   }
 
   getInstance = () => {

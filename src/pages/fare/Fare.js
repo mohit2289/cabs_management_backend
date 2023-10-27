@@ -25,6 +25,7 @@ import FarePoint from "./farePoint";
 import {getAllcityList} from '../../services/city/index';
 import {getCabCategory, getVechicleByCategoryId} from '../../services/cab/index';
 import {getAllLocalPackage} from '../../services/localpackage/index';
+import {addFare} from '../../services/fare/index';
 
 
 export default function FarePage() {
@@ -127,8 +128,8 @@ export default function FarePage() {
         const categoryData =  getData.data;
         const categoryObj = categoryData.map(elem => (
           {
-            id: elem.category_id,
-            label: elem.category_name,
+            id: elem.id,
+            label: elem.vehicle_type,
           } 
         ));
         setVehicleCategory(categoryObj);
@@ -168,8 +169,8 @@ export default function FarePage() {
 
   const saveData = async() => {
     try {    
-      const postData = data;    
-      //const resp  = await addDriver(postData);
+      const postData = data;   
+      const resp  = await addFare(postData);
       //toast.success('Data saved successfully');
       //history.push('/app/driverList');
     } catch (error) {

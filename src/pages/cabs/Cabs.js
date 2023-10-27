@@ -63,9 +63,9 @@ export default function CabsPage() {
         const categoryData =  getData.data;
         const categoryObj = categoryData.map(elem => (
           {
-            id: elem.category_id,
-            label: elem.category_name,
-            seat: elem.seat_no
+            id: elem.id,
+            label: elem.vehicle_type,
+            seat: elem.seating_capacity
           } 
         ));
         setOptions(categoryObj);

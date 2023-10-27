@@ -3,7 +3,7 @@ import MUIDataTable from "mui-datatables";
 
 const columns = [
   {
-   name: "category_name",
+   name: "vehicle_type",
    label: "Vehicle Category",
    options: {
     filter: true,
@@ -11,7 +11,7 @@ const columns = [
    }
   },
   {
-   name: "seat_no",
+   name: "seating_capacity",
    label: "Vehicle Segment by Seat",
    options: {
     filter: true,
@@ -39,7 +39,7 @@ const columns = [
 
 export default function CabCategoryTable({categoryList}) {
   const datatableData = categoryList;
-
+  
   return (
     <>
        <MUIDataTable

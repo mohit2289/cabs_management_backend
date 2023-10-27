@@ -16,5 +16,6 @@ export const CITY_LIST = `admin/city/city-list`;
 export const ADD_CITY_DISTANCE = `admin/city/add-city-distance`;
 
 export const LOCAL_PACKAGES = `admin/localpackage/`;
-export const GET_ALL_FARE_DETAILS = `admin/fare/get-all-fare`
+export const GET_ALL_FARE_DETAILS = `admin/fare/get-all-fare`;
+export const ADD_FARE = `admin/fare/add-fare`;
 
