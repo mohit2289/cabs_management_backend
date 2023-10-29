@@ -1,5 +1,5 @@
 import ApiFunction from '../APIFunction'
-import { GET_CITY_BY_STATE, ADD_CITY, CITY_LIST,ADD_CITY_DISTANCE} from '../constants';
+import { GET_CITY_BY_STATE, ADD_CITY, CITY_LIST} from '../constants';
 
 export const getCityByStateId = async (id) => {
     const apiFunction = new ApiFunction();
@@ -14,9 +14,4 @@ export const addCity = async (params) => {
 export const getAllcityList = async () => {
     const apiFunction = new ApiFunction();
     return await apiFunction.get(CITY_LIST);
-}
-
-export const addCityDistance = async (params) => {
-    const apiFunction = new ApiFunction();
-    return await apiFunction.post(params, ADD_CITY_DISTANCE);
 }

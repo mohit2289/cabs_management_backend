@@ -3,7 +3,9 @@ import { Box, Button, Paper, Grid } from '@mui/material';
 // styles
 import useStyles from "./styles";
 
-import {getAllcityList,addCityDistance} from '../../services/city/index';
+import {addCityDistance} from '../../services/distance/index';
+import {getAllcityList} from '../../services/city/index';
+
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
@@ -129,7 +131,7 @@ export default function DistancePage() {
           
           <Grid item xs={12} md={2}>
             <Button variant="contained" fullWidth sx={{ my: 3 }} onClick={saveData}>
-              Add Distance
+             Save
             </Button>
           </Grid>
           

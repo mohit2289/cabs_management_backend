@@ -1,22 +1,36 @@
-import React from "react";
+import React , { useState, useEffect }from "react";
 //import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import MUIDataTable from "mui-datatables";
 
-// components
-//import PageTitle from "../../components/PageTitle/PageTitle";
-//import { fontWeight } from "@mui/system";
-//import Widget from "../../components/Widget/Widget";
-//import Table from "../dashboard/components/Table/Table";
+import {getAllCityDistance} from '../../services/distance/index';
 
-// data
-//import mock from "../dashboard/mock";
-
-const datatableData = [
-  ["Patna", "Bhagalpur", "200KM", "Edite  Delete   "],
-  ["Patna", "Banka.", "240KM.", "Edite  Delete"],
- 
-];
+const columns = [
+  {
+   name: "from_city_name",
+   label: "From Name",
+   options: {
+    filter: true,
+    sort: true,
+   }
+  },
+  {
+   name: "to_city_name",
+   label: "To City",
+   options: {
+    filter: true,
+    sort: false,
+   }
+  },
+  {
+   name: "distance",
+   label: "Distance",
+   options: {
+    filter: true,
+    sort: false,
+   }
+  } 
+ ];
 
 const useStyles = makeStyles(theme => ({
   tableOverflow: {
@@ -26,12 +40,24 @@ const useStyles = makeStyles(theme => ({
 
 export default function DistanceTable() {
   const classes = useStyles();
+  const [distanceList, setDistanceList] = useState([]);
+
+  useEffect(()=>{
+    getAllDistanceList();
+  },[])
+
+  const getAllDistanceList = async() => {
+    const response = await getAllCityDistance();
+    if (response.data) {
+      setDistanceList(response.data);
+    }
+  }
   return (
     <>
        <MUIDataTable
             title="Distance LIst"
-            data={datatableData}
-            columns={["From City", "To City", "Distance", "Action"]}
+            data={distanceList}
+            columns={columns}
             options={{
               filterType: "checkbox",
             }}
