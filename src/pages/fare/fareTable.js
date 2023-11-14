@@ -15,7 +15,7 @@ const columns = [{
   }
  },
  {
-  name: "package_mode",
+  name: "package_name",
   label: "Booking Type",
   options: {
    filter: true,
@@ -121,6 +121,17 @@ export default function DriverTable() {
             );
 			   }
             }}
+            actions={[
+              {
+                tooltip: "Delete User",
+                onClick: (event, rowData) => alert("You want to delete " + rowData.name),
+              },
+              {
+                tooltip: "Add User",
+                isFreeAction: true,
+                onClick: (event) => alert("You want to add a new row"),
+              },
+            ]}
           />
     </>
   );

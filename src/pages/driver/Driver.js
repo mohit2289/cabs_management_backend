@@ -137,7 +137,7 @@ export default function DriverPage() {
         const categoryData =  getData.data;
         const categoryObj = categoryData.map(elem => (
           {
-            id: elem.category_id,
+            id: elem.id,
             label: elem.vehicle_type,
             seat: elem.seating_capacity
           } 

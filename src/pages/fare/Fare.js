@@ -31,6 +31,7 @@ import {addFare} from '../../services/fare/index';
 export default function FarePage() {
  const [packageId, setPackageId] = useState(1);
  const [fromcity, setFromCity] = useState([]);
+ const [destinationCity, setDestinationCity] = useState([]);
  const [vehicleCategory, setVehicleCategory ] = useState([]);
  const [vehicle, setVehicle ] = useState([]);
  const [localPackage, setLocalPackage] = useState([]);
@@ -44,7 +45,13 @@ export default function FarePage() {
   'local_package':"",
   "local_pkg_fare":"",
   "per_km_charge":"",
-  "per_hr_charge":""
+  "per_hr_charge":null,
+  'destination_city': '',
+  'driver_allowance':"",
+  "night_charge":"",
+  "night_start_time":"22:00:00",
+  "night_end_time":"06:00:00"
+
 });
   const optionData = [
     {
@@ -68,13 +75,28 @@ export default function FarePage() {
     let value = evt.target.value;
     let evtName = evt.target.name;
     if(evtName=='package'){
-      setPackageId(value);
+      setPackageId(Number(value));   
+      let pkgid = Number(value);
+      if(pkgid==1){
+        setData({
+          ...data,
+          ['master_package_mode_id']: 3,
+          ['master_package_id']: pkgid
+        });
+        
+      }else{
+        setData({
+          ...data,
+          ['master_package_mode_id']: 3,
+          ['master_package_id']: pkgid
+        });
+      }
+    }else {
+      setData({
+        ...data,
+        [evtName]: value
+      });
     }
-    setData({
-      ...data,
-      [evtName]: value
-    });
-    
   };
 
   const handleOnChange = (event, value) =>{
@@ -106,6 +128,12 @@ export default function FarePage() {
         ['master_package_mode_id']: value.pkgmodeId,
       });
     }
+    if(event=='destination_city'){
+      setData({
+        ...data,
+        ['destination_city']: value.id,
+      });
+    }
   }
 
   const getFromCityData = async() => {
@@ -119,6 +147,7 @@ export default function FarePage() {
         } 
       ));
       setFromCity(cityArr);
+      setDestinationCity(cityArr);
     }
   }
 
@@ -153,7 +182,6 @@ export default function FarePage() {
 
   const getLocalPackageData = async() => {
     const getData = await getAllLocalPackage();
-    console.log(getData.data);
     if (getData.data) {
         const packagesData =  getData.data;
         const packagesObj = packagesData.map(elem => (
@@ -169,7 +197,9 @@ export default function FarePage() {
 
   const saveData = async() => {
     try {    
-      const postData = data;   
+      const postData = data;  
+      console.log(postData)
+      postData.minimum_charge =  postData.local_pkg_fare;
       const resp  = await addFare(postData);
       //toast.success('Data saved successfully');
       //history.push('/app/driverList');
@@ -184,7 +214,7 @@ export default function FarePage() {
     getLocalPackageData();
   },[])
 
-  console.log(data);
+  console.log(data)
   return (
     <>
       {/* <PageTitle title="Driver" /> */}
@@ -199,7 +229,11 @@ export default function FarePage() {
           <Grid container spacing={1}>
         
               <Grid item xs={12} md={12}>
-                <GenericRadio orientation={'row'} name="package" options={optionData} defaultSelected={1} onChange={handlerChange} />
+                <GenericRadio orientation={'row'} name="package" 
+                options={optionData} 
+                defaultValue={1} 
+                value={packageId}
+                onChange={handlerChange} />
               </Grid>
           </Grid>
           </Grid>
@@ -213,8 +247,15 @@ export default function FarePage() {
                   label={'Select city'} 
                   />
           </Grid>
-          {packageId!=1 && <Grid item xs={12} md={4}>
-          <GenericDropdown label={'Destination City  '} required />
+          {packageId!='1' && 
+          <Grid item xs={12} md={4}>
+          <GenericAutocomplete 
+            label={'Destination City'} 
+            options={destinationCity}
+            onChange={(e,val) => {
+              handleOnChange('destination_city',val)
+            }} 
+            required />
           
           </Grid> }
           <Grid item xs={12} md={4}>
@@ -238,20 +279,22 @@ export default function FarePage() {
                   />
           </Grid>
          
-          {packageId==1 &&
+          {(packageId=='1' || packageId=='2') && 
             <FareLocal 
               localPackage={localPackage} 
               handleOnChange={handleOnChange}
-              handlerChange={handlerChange} />
+              handlerChange={handlerChange} 
+              packageId = {data.master_package_id}
+              />
           }
           {packageId==4 && 
             <FareOutstation/>
           }
-          {packageId==2 && 
-              <FarePoint/>
-          }
+          {/* {packageId==2 && 
+              <FarePoint />
+          } */}
        
-          <Grid item xs={12} md={6}>
+          {/* <Grid item xs={12} md={6}>
               <Grid container spacing={1}>
           
                 <Grid item xs={12} md={6}>
@@ -261,16 +304,31 @@ export default function FarePage() {
                   <GenericInput type={'date'} label={'End Date'}  value={''}/>
                 </Grid>
               </Grid>
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={12} md={6}>
           <Grid container spacing={1}>
        
+            <Grid item xs={12} md={6}>
+              <GenericInput 
+              type={'time'} 
+              label={'Night Charges Start Time'} 
+              name="night_start_time"
+              value={'22:00'} 
+              onChange={(e)=>{
+                handlerChange(e)
+              }}
+              />
+            </Grid>
           <Grid item xs={12} md={6}>
-            <GenericInput type={'time'} label={'Night Charges Start Time'} value={'10:00'}  />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <GenericInput type={'time'} label={'Night Charges End Time'}  value={'06:00'}/>
+            <GenericInput type={'time'} 
+             value={'06:00'} 
+             label={'Night Charges End Time'} 
+             name="night_end_time"
+             onChange={(e)=>{
+               handlerChange(e)
+             }}
+             />
           </Grid>
           </Grid>
           </Grid>

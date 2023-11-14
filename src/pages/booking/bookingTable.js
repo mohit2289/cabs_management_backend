@@ -1,22 +1,94 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import MUIDataTable from "mui-datatables";
 
-// components
-import PageTitle from "../../components/PageTitle/PageTitle";
-import { fontWeight } from "@mui/system";
-//import Widget from "../../components/Widget/Widget";
-//import Table from "../dashboard/components/Table/Table";
+import {getAllBookingList} from '../../services/booking/index';
 
-// data
-//import mock from "../dashboard/mock";
 
-const datatableData = [
-  ["1", "24-07-2023 08:50 PM", "Pick Up Date   16-06-2023 Pick Up Time 11:15 AM", "Trip Type:  One way Trip Mode: One way", "SEDAN 4+1 Maruti Suzuki Swift Dzire OR SIMILAR(4+1 )", "ajay Passengers - 1", "7870141333", "Patna ,Bihar", "Patna Bihar", "Rajgir", "View Fare    Confirm   Assign   Edit   Cancle  Broadcast   "],
-  ["1", "24-07-2023 08:50 PM", "Pick Up Date   16-06-2023 Pick Up Time 11:15 AM", "Trip Type:  One way Trip Mode: One way", "SEDAN 4+1 Maruti Suzuki Swift Dzire OR SIMILAR(4+1 )", "ajay Passengers - 1", "7870141333", "Patna ,Bihar", "Patna Bihar", "Rajgir", "View Fare    Confirm   Assign   Edit   Cancle  Broadcast   "],
- 
-];
+const columns = [
+  {
+   name: "booking_reference",
+   label: "PNR",
+   options: {
+    filter: true,
+    sort: true,
+   }
+  },
+  {
+    name: "booking_date",
+    label: "Date of Booking",
+    options: {
+     filter: true,
+     sort: true,
+    }
+   },
+   {
+    name: "travel_date",
+    label: "Journey Date",
+    options: {
+     filter: true,
+     sort: true,
+    }
+   },
+   {
+    name: "booking_type",
+    label: "Booking Type",
+    options: {
+     filter: true,
+     sort: true,
+    }
+   },
+   {
+    name: "vehice_name",
+    label: "Vehicle Name",
+    options: {
+     filter: true,
+     sort: true,
+    }
+   },
+   {
+    name: "name",
+    label: "Customer Name",
+    options: {
+     filter: true,
+     sort: true,
+    }
+   },
+   {
+    name: "mobile",
+    label: "Mobile",
+    options: {
+     filter: true,
+     sort: true,
+    }
+   },
+   {
+    name: "",
+    label: "Pickup City",
+    options: {
+     filter: true,
+     sort: true,
+    }
+   },
+
+    {
+    name: "pickup_address",
+    label: "Pickup Address",
+    options: {
+     filter: true,
+     sort: true,
+    }
+   },
+   {
+    name: "drop_address",
+    label: "Drop Address",
+    options: {
+     filter: true,
+     sort: true,
+    }
+   }
+]
 
 const useStyles = makeStyles(theme => ({
   tableOverflow: {
@@ -26,13 +98,26 @@ const useStyles = makeStyles(theme => ({
 
 export default function CabsTable() {
   const classes = useStyles();
+
+  const [bookingList ,setBookingList] = useState([]);
+
+  useEffect(()=>{
+    getAllBookingData();
+  },[])
+
+  const getAllBookingData = async() => {
+    const response = await getAllBookingList();
+    if (response.data) {
+      setBookingList(response.data);
+    }
+  }
+
   return (
     <>
        <MUIDataTable
             title="Booking LIst"
-            data={datatableData}
-            columns={["PNR", "Date of Booking", "Date if Jurney", "Trip Type", 
-            "Vehicle", "Customer Name", "Phone No", "Home City", "Pickup Add", "Dropup Add", "Action"]}
+            data={bookingList}
+            columns={columns}
             options={{
               filterType: "checkbox",
             }}

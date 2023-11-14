@@ -20,4 +20,7 @@ export const GET_ALL_FARE_DETAILS = `admin/fare/get-all-fare`;
 export const ADD_FARE = `admin/fare/add-fare`;
 
 export const GET_ALL_CITY_DISTANCE = `admin/distance/get-all-distances`;
+export const GET_SEARCH_CAB_DATA = `admin/fare/get-cab-search-data`;
 
+
+export const GET_BOOKING_LIST = `admin/booking/bookinglist`;
