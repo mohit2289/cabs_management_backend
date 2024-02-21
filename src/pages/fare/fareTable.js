@@ -8,7 +8,15 @@ import {getAllFareDetails} from '../../services/fare/index';
 
 const columns = [{
   name: "city_name",
-  label: "City",
+  label: "From City",
+  options: {
+   filter: true,
+   sort: true,
+  }
+ },
+ {
+  name: "destination_city_name",
+  label: "To City",
   options: {
    filter: true,
    sort: true,
@@ -24,7 +32,7 @@ const columns = [{
  }, 
  {
   name: "local_pkg_name",
-  label: "Package",
+  label: "Local Package",
   options: {
    filter: true,
    sort: true,

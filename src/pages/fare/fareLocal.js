@@ -28,14 +28,26 @@ export default function FareLocal(props) {
                       />   
               </Grid>
               )}  
-                <Grid item xs={12} md={4}>                
-                  <GenericInput label={'Fixed Fare'} 
-                    name="local_pkg_fare"
-                    onChange={(e)=>{
-                      handlerChange(e)
-                    }}                   
-                  />           
-              </Grid>
+                {(packageId!='4' &&  
+                  <Grid item xs={12} md={4}>                
+                    <GenericInput label={'Fixed Fare'} 
+                      name="local_pkg_fare"
+                      onChange={(e)=>{
+                        handlerChange(e)
+                      }}                   
+                    />           
+                </Grid>
+              )}
+
+              {(packageId=='4' && 
+                <Grid item xs={12} md={4}>
+                  <GenericInput label={'Minimum KM'}
+                  name="minimum_distance"
+                  onChange={(e)=>{
+                    handlerChange(e)
+                  }}  />
+              </Grid> 
+              )}
               <Grid item xs={12} md={4}>
                 <GenericInput label={'Fare Per Kms'}
                  name="per_km_charge"

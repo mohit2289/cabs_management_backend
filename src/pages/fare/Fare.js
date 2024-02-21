@@ -44,6 +44,7 @@ export default function FarePage() {
   'vehicle_model':"",
   'local_package':"",
   "local_pkg_fare":"",
+  "minimum_distance":"",
   "per_km_charge":"",
   "per_hr_charge":null,
   'destination_city': '',
@@ -77,7 +78,7 @@ export default function FarePage() {
     if(evtName=='package'){
       setPackageId(Number(value));   
       let pkgid = Number(value);
-      if(pkgid==1){
+      if(pkgid==1 || pkgid==2){
         setData({
           ...data,
           ['master_package_mode_id']: 3,
@@ -87,7 +88,7 @@ export default function FarePage() {
       }else{
         setData({
           ...data,
-          ['master_package_mode_id']: 3,
+          ['master_package_mode_id']: 1,
           ['master_package_id']: pkgid
         });
       }
@@ -279,7 +280,7 @@ export default function FarePage() {
                   />
           </Grid>
          
-          {(packageId=='1' || packageId=='2') && 
+          {(packageId=='1' || packageId=='2' || packageId==4) && 
             <FareLocal 
               localPackage={localPackage} 
               handleOnChange={handleOnChange}
@@ -287,9 +288,9 @@ export default function FarePage() {
               packageId = {data.master_package_id}
               />
           }
-          {packageId==4 && 
+          {/* {packageId==4 && 
             <FareOutstation/>
-          }
+          } */}
           {/* {packageId==2 && 
               <FarePoint />
           } */}
