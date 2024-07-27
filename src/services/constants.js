@@ -24,3 +24,4 @@ export const GET_SEARCH_CAB_DATA = `admin/fare/get-cab-search-data`;
 
 
 export const GET_BOOKING_LIST = `admin/booking/bookinglist`;
+export const GET_ATTACH_TAXI_LIST = `admin/attachtaxi/list`;

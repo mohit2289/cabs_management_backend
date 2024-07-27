@@ -3,19 +3,19 @@ import React,{useEffect,useState} from "react";
 import { makeStyles } from "@material-ui/styles";
 import MUIDataTable from "mui-datatables";
 
-import {getSearchCabData} from '../../services/fare/index';
+import {getAllAttachTaxiList} from '../../services/attachtaxi/index';
 
 const columns = [
   {
-   name: "username",
-   label: "User Name",
+   name: "driver_name",
+   label: "Driver Name",
    options: {
     filter: true,
     sort: true,
    }
   },
   {
-   name: "mobile",
+   name: "driver_mobile",
    label: "Mobile No.",
    options: {
     filter: true,
@@ -23,77 +23,53 @@ const columns = [
    }
   },
   {
-    name: "pickup_city",
-    label: "Pickup City",
+    name: "driver_email",
+    label: "Email",
     options: {
      filter: true,
      sort: false,
     }
    },
    {
-    name: "drop_city",
-    label: "Drop City",
+    name: "address",
+    label: "Address",
     options: {
      filter: true,
      sort: false,
     }
    },
    {
-    name: "pickup_address",
-    label: "Pickup Address",
+    name: "state",
+    label: "State",
     options: {
      filter: true,
      sort: false,
     }
    },
   {
-   name: "drop_address",
-   label: "Address",
+   name: "city",
+   label: "City",
    options: {
     filter: true,
     sort: false,
    }
   },
   {
-    name: "package",
-    label: "Local Package",
+    name: "cab_category",
+    label: "Cab Category",
     options: {
      filter: true,
      sort: false,
     }
    },
    {
-    name: "module_name",
-    label: "Module",
+    name: "cab_name",
+    label: "Cab Name",
     options: {
      filter: true,
      sort: false,
     }
-   },
-   {
-    name: "pickup_date",
-    label: "Pickup Date",
-    options: {
-     filter: true,
-     sort: false,
-    }
-   },
-   {
-    name: "pickup_time",
-    label: "Pickup Time",
-    options: {
-     filter: true,
-     sort: false,
-    }
-   },
-   {
-    name: "added_date",
-    label: "Created Date",
-    options: {
-     filter: true,
-     sort: false,
-    }
-   },
+   }
  ];
 
 const useStyles = makeStyles(theme => ({
@@ -104,23 +80,24 @@ const useStyles = makeStyles(theme => ({
 
 export default function TaxiRequestTable() {
 
-const [searchCabList ,setSearchCabList] = useState([]);
+const [attachTaxiList ,setAttachTaxiList] = useState([]);
 
 useEffect(()=>{
-  getAllSearchCabData();
+  getAttachTaxiListData();
 },[])
 
-const getAllSearchCabData = async() => {
-  const response = await getSearchCabData();
+const getAttachTaxiListData = async() => {
+  const response = await getAllAttachTaxiList();
   if (response.data) {
-    setSearchCabList(response.data);
+    setAttachTaxiList(response.data);
   }
 }
+
   return (
     <>
        <MUIDataTable
             title="View Attach Taxi Request "
-            data={searchCabList}
+            data={attachTaxiList}
             columns={columns}
             options={{
               filterType: "checkbox",
